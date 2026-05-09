@@ -22,16 +22,13 @@ jobs:
           node-version: 20
 
       - name: Setup Rust
-        uses: dtolnay/rust-action@stable
+        uses: dtolnay/rust-action@v1
 
       - name: Install dependencies
         run: npm install
 
       - name: Install Tauri CLI
         run: cargo install tauri-cli --version "^2.0.0"
-
-      - name: Generate icons
-        run: cargo tauri icon src-tauri/icons/icon.png
 
       - name: Download Windows FFmpeg
         run: |
@@ -46,8 +43,7 @@ jobs:
           Remove-Item $ffmpegDir.FullName -Recurse -Force
 
       - name: Build Tauri app
-        run: cargo tauri build
-        working-directory: ./src-tauri
+        run: npm run tauri build
         env:
           CI: true
 
